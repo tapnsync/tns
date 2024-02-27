@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /build/
+
+  # If the request is for a file or directory that exists, don't rewrite
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Rewrite all other requests to /build/index.html
+  RewriteRule ^ /build/index.html [L]
+</IfModule>
+
+# Custom error handling for 404
+ErrorDocument 404 /build/index.html
